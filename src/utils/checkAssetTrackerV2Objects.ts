@@ -20,6 +20,8 @@ export const checkAssetTrackerV2Objects = (
 					missingObjects,
 				)}.`,
 			),
+			// TODO: create error message
+			// https://stackoverflow.com/questions/31626231/custom-error-class-in-typescript
 		}
 
 	return { result: true }
