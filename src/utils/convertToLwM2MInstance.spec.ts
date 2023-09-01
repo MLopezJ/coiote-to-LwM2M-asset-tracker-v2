@@ -1,7 +1,9 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import { convertToLwM2MInstance } from './convertToLwM2MInstance.js'
 
-describe('convertToLwM2MInstance', () => {
-	it('should convert object using object type definition schema', () => {
+void describe('convertToLwM2MInstance', () => {
+	void it('should convert object using object type definition schema', () => {
 		const schema = {
 			type: 'object',
 			$id: 'https://github.com/OpenMobileAlliance/lwm2m-registry/raw/prod/3.xml',
@@ -65,6 +67,6 @@ describe('convertToLwM2MInstance', () => {
 			'16': 'UQ',
 		}
 
-		expect(convertToLwM2MInstance(object, schema)).toMatchObject(result)
+		assert.deepEqual(convertToLwM2MInstance(object, schema), result)
 	})
 })

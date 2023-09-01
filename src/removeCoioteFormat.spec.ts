@@ -1,3 +1,5 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import {
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
@@ -10,8 +12,8 @@ import { Config_50009_urn } from '../schemas/Config_50009.js'
 import { type assetTrackerObjects } from './getAssetTrackerV2Objects.js'
 import { removeCoioteFormat } from './removeCoioteFormat.js'
 
-describe('removeCoioteFormat', () => {
-	it('should build lwm2m format', () => {
+void describe('removeCoioteFormat', () => {
+	void it('should build lwm2m format', () => {
 		const input: assetTrackerObjects = {
 			[Device_3_urn]: {
 				'0': {
@@ -246,16 +248,6 @@ describe('removeCoioteFormat', () => {
 
 		const result = removeCoioteFormat(input)
 
-		expect(result[Device_3_urn]).toMatchObject(expected[Device_3_urn])
-		expect(result[ConnectivityMonitoring_4_urn]).toMatchObject(
-			expected[ConnectivityMonitoring_4_urn],
-		)
-		expect(result[Location_6_urn]).toMatchObject(expected[Location_6_urn])
-		expect(result[Temperature_3303_urn]).toMatchObject(
-			expected[Temperature_3303_urn],
-		)
-		expect(result[Humidity_3304_urn]).toMatchObject(expected[Humidity_3304_urn])
-		expect(result[Pressure_3323_urn]).toMatchObject(expected[Pressure_3323_urn])
-		expect(result[Config_50009_urn]).toMatchObject(expected[Config_50009_urn])
+		assert.deepEqual(result, expected)
 	})
 })

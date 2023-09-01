@@ -1,7 +1,9 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import { convertObjectUsingSchema } from './convertObjectUsingSchema.js'
 
-describe('convertObjectUsingSchema', () => {
-	it('should convert object using object type definition schema', () => {
+void describe('convertObjectUsingSchema', () => {
+	void it('should convert object using object type definition schema', () => {
 		const schema = {
 			type: 'object',
 			$id: 'https://github.com/OpenMobileAlliance/lwm2m-registry/raw/prod/3.xml',
@@ -64,7 +66,6 @@ describe('convertObjectUsingSchema', () => {
 			'11': [0],
 			'16': 'UQ',
 		}
-
-		expect(convertObjectUsingSchema(object, schema)).toMatchObject(result)
+		assert.deepEqual(convertObjectUsingSchema(object, schema), result)
 	})
 })

@@ -1,3 +1,5 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import {
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
@@ -10,8 +12,8 @@ import { Config_50009_urn } from './../../schemas/Config_50009.js'
 
 import { checkAssetTrackerV2Objects } from './checkAssetTrackerV2Objects.js'
 
-describe('checkAssetTrackerV2Objects', () => {
-	it('Should return an error if list has not the expected LwM2M elements', () => {
+void describe('checkAssetTrackerV2Objects', () => {
+	void it('Should return a warning if the list has not the expected LwM2M elements', () => {
 		const input = [
 			ConnectivityMonitoring_4_urn,
 			Device_3_urn,
@@ -22,10 +24,10 @@ describe('checkAssetTrackerV2Objects', () => {
 			Config_50009_urn,
 		]
 		const result = checkAssetTrackerV2Objects(input) as { warning: Error }
-		expect(result.warning).not.toBe(undefined)
+		assert.notEqual(result.warning, undefined)
 	})
 
-	it('Should return result if list has the expected LwM2M elements', () => {
+	void it('Should return true if the list has all the expected LwM2M elements', () => {
 		const input = [
 			ConnectivityMonitoring_4_urn,
 			Device_3_urn,
@@ -36,6 +38,6 @@ describe('checkAssetTrackerV2Objects', () => {
 			Config_50009_urn,
 		]
 		const result = checkAssetTrackerV2Objects(input) as { result: true }
-		expect(result.result).toBe(true)
+		assert.equal(result.result, true)
 	})
 })

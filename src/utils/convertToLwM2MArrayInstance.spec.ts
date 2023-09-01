@@ -1,7 +1,9 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
 
-describe('convertToLwM2MArrayInstance', () => {
-	it(`should convert list using array type definition schema`, () => {
+void describe('convertToLwM2MArrayInstance', () => {
+	void it(`should convert list using array type definition schema`, () => {
 		const schema = {
 			type: 'array',
 			minItems: 1,
@@ -91,11 +93,10 @@ describe('convertToLwM2MArrayInstance', () => {
 				'23': 0,
 			},
 		]
-
-		expect(convertToLwM2MArrayInstance(object, schema)).toMatchObject(result)
+		assert.deepEqual(convertToLwM2MArrayInstance(object, schema), result)
 	})
 
-	it(`should remove empty values when they are not required in schema definition`, () => {
+	void it(`should remove empty values when they are not required in schema definition`, () => {
 		const schema = {
 			type: 'array',
 			minItems: 1,
@@ -141,10 +142,10 @@ describe('convertToLwM2MArrayInstance', () => {
 			},
 		]
 
-		expect(convertToLwM2MArrayInstance(object, schema)).toMatchObject(result)
+		assert.deepEqual(convertToLwM2MArrayInstance(object, schema), result)
 	})
 
-	it(`should return undefined when a required value is not defined`, () => {
+	void it(`should return undefined when a required value is not defined`, () => {
 		const schema = {
 			type: 'array',
 			minItems: 1,
@@ -200,6 +201,6 @@ describe('convertToLwM2MArrayInstance', () => {
 			},
 		]
 
-		expect(convertToLwM2MArrayInstance(object, schema)).toStrictEqual(result)
+		assert.deepEqual(convertToLwM2MArrayInstance(object, schema), result)
 	})
 })

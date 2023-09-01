@@ -4,7 +4,7 @@
   "description": "Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration to LwM2M Asset Tracker v2 JSON encoding",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "find ./ -type f -name '*.spec.ts' ! -path '*/node_modules/*' -exec npx tsx {} ';'",
     "prepare": "husky install",
     "prepublish": "npx swc -d dist ./src"
   },

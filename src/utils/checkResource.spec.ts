@@ -1,34 +1,36 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import type { Value } from 'src/converter'
 import { checkResource } from './checkResource.js'
 
-describe('checkResource', () => {
-	it('should return true when required resource value is not undefined', () => {
+void describe('checkResource', () => {
+	void it('should return true when required resource value is not undefined', () => {
 		const isRequired = true
 		const input = { value: 6 }
-		expect(checkResource(input, isRequired)).toBe(true)
+		assert.equal(checkResource(input, isRequired), true)
 	})
 
-	it('should return false when required resource value is undefined', () => {
+	void it('should return false when required resource value is undefined', () => {
 		const isRequired = true
 		const input = {} as Value
-		expect(checkResource(input, isRequired)).toBe(false)
+		assert.equal(checkResource(input, isRequired), false)
 	})
 
-	it('should return true when a not required value is not undefined', () => {
+	void it('should return true when a not required value is not undefined', () => {
 		const isRequired = false
 		const input = {
 			value: false,
 		}
-		expect(checkResource(input, isRequired)).toBe(true)
+		assert.equal(checkResource(input, isRequired), true)
 	})
 
-	it('should return true when a not required value is undefined', () => {
+	void it('should return true when a not required value is undefined', () => {
 		const isRequired = false
 		const input = {} as Value
-		expect(checkResource(input, isRequired)).toBe(true)
+		assert.equal(checkResource(input, isRequired), true)
 	})
 
-	it('should return true when required resource list is not undefined', () => {
+	void it('should return true when required resource list is not undefined', () => {
 		const isRequired = true
 		const input = {
 			'0': {
@@ -39,20 +41,20 @@ describe('checkResource', () => {
 			},
 		}
 
-		expect(checkResource(input, isRequired)).toBe(true)
+		assert.equal(checkResource(input, isRequired), true)
 	})
 
-	it('should return false when required resource list is undefined', () => {
+	void it('should return false when required resource list is undefined', () => {
 		const isRequired = true
 		const input = {
 			attributes: {
 				dim: '0',
 			},
 		}
-		expect(checkResource(input, isRequired)).toBe(false)
+		assert.equal(checkResource(input, isRequired), false)
 	})
 
-	it('should return true when no required resource list is not undefined', () => {
+	void it('should return true when no required resource list is not undefined', () => {
 		const isRequired = false
 		const input = {
 			'0': {
@@ -63,16 +65,16 @@ describe('checkResource', () => {
 			},
 		}
 
-		expect(checkResource(input, isRequired)).toBe(true)
+		assert.equal(checkResource(input, isRequired), true)
 	})
 
-	it('should return true when no required resource list is undefined', () => {
+	void it('should return true when no required resource list is undefined', () => {
 		const isRequired = false
 		const input = {
 			attributes: {
 				dim: '0',
 			},
 		}
-		expect(checkResource(input, isRequired)).toBe(true)
+		assert.equal(checkResource(input, isRequired), true)
 	})
 })

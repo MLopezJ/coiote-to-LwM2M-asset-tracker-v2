@@ -1,3 +1,5 @@
+import { describe, it } from 'node:test'
+import assert from 'node:assert'
 import {
 	Device_3_urn,
 	Location_6_urn,
@@ -5,8 +7,8 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import { checkLwM2MFormat } from './checkLwM2MFormat.js'
 
-describe('checkLwM2MFormat', () => {
-	it('should return true if object has the LwM2M struct', () => {
+void describe('checkLwM2MFormat', () => {
+	void it('should return true if object has the LwM2M struct', () => {
 		const input = {
 			[Location_6_urn]: {
 				'0': -43.5723,
@@ -17,10 +19,10 @@ describe('checkLwM2MFormat', () => {
 			},
 		}
 		const check = checkLwM2MFormat(input) as { result: true }
-		expect(check.result).toBe(true)
+		assert.equal(check.result, true)
 	})
 
-	it('should return an error when the LwM2M object has wrong data type on its resources', () => {
+	void it('should return an error when the LwM2M object has wrong data type on its resources', () => {
 		const input = {
 			[Device_3_urn]: {
 				'0': 1, // expecting string
@@ -37,6 +39,6 @@ describe('checkLwM2MFormat', () => {
 		const check = checkLwM2MFormat(
 			input as unknown as Partial<LwM2MDocument>,
 		) as { error: Error }
-		expect(check.error).not.toBe(undefined)
+		assert.notEqual(check.error, undefined)
 	})
 })
