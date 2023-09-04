@@ -1,7 +1,11 @@
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert'
 import { removeFormat } from './removeFormat.js'
+import type { Instance } from 'src/converter.js'
 
-describe('removeFormat', () => {
-	it.each([
+void describe('removeFormat', () => {
+	// check single instance
+	for (const [input, expected] of [
 		[
 			{
 				'0': {
@@ -67,14 +71,13 @@ describe('removeFormat', () => {
 				'9': 0.5,
 			},
 		],
-	])(
-		'should remove Coiote format from single instance objects',
-		(input, output) => {
-			expect(removeFormat(input)).toMatchObject(output)
-		},
-	)
+	]) {
+		void it('should remove Coiote format from single instance objects', () =>
+			assert.deepEqual(removeFormat(input as Instance), expected))
+	}
 
-	it.each([
+	// check multiple instance
+	for (const [input, expected] of [
 		[
 			{
 				'0': {
@@ -157,10 +160,8 @@ describe('removeFormat', () => {
 				},
 			],
 		],
-	])(
-		'should remove Coiote format from multiple instance object',
-		(input, output) => {
-			expect(removeFormat(input)).toMatchObject(output)
-		},
-	)
+	]) {
+		void it('should remove Coiote format from multiple instance object', () =>
+			assert.deepEqual(removeFormat(input as Instance), expected))
+	}
 })
