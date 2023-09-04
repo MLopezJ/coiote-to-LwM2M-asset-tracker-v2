@@ -1,12 +1,14 @@
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert'
 import {
 	Device_3_urn,
 	Location_6_urn,
 	LwM2MServer_1_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { setLwM2MFormat } from './setLwM2MFormat.js'
+import { type ObjectWithUrn, setLwM2MFormat } from './setLwM2MFormat.js'
 
-describe('setLwM2MFormat', () => {
-	it.each([
+void describe('setLwM2MFormat', () => {
+	for (const [objectName, input, expected] of [
 		[
 			'Device',
 			{
@@ -120,7 +122,7 @@ describe('setLwM2MFormat', () => {
 				},
 			},
 		],
-	])('should build lwm2m format of %s object', (objectName, input, output) => {
-		expect(setLwM2MFormat(input)).toMatchObject(output)
-	})
+	])
+		void it(`should build lwm2m format of ${objectName} object`, () =>
+			assert.deepEqual(setLwM2MFormat(input as ObjectWithUrn), expected))
 })

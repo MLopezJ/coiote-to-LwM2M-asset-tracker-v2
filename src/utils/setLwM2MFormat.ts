@@ -7,14 +7,14 @@ import { convertToLwM2MInstance } from './convertToLwM2MInstance.js'
 /**
  * Object which id is an URN from '@nordicsemiconductor/lwm2m-types' lib
  */
-export type objectWithUrn = {
+export type ObjectWithUrn = {
 	[key in keyof LwM2MDocument]: Instance
 }
 
 /**
  * Set LwM2M format using @nordicsemiconductor/lwm2m-types json schema
  */
-export const setLwM2MFormat = (object: objectWithUrn): LwM2MDocument => {
+export const setLwM2MFormat = (object: ObjectWithUrn): LwM2MDocument => {
 	const urn = Object.keys(object)[0]
 	const instances = Object.values(object)[0]
 
