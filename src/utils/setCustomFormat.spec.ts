@@ -1,8 +1,10 @@
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert'
 import type { Instance, LwM2MCoiote } from '../converter'
 import { setCustomFormat } from './setCustomFormat.js'
 
-describe('setCustomFormat', () => {
-	it.each([
+void describe('setCustomFormat', () => {
+	for (const [input, expected] of [
 		[
 			{
 				'50001': {
@@ -77,21 +79,24 @@ describe('setCustomFormat', () => {
 				},
 			},
 		],
-	])('should build custom format for object: %s', (input, expected) => {
-		expect(setCustomFormat(input)).toMatchObject(expected)
-	})
+	]) {
+		void it(`should build custom format for object: ${Object.keys(
+			input as Record<string, unknown>,
+		)}`, () =>
+			assert.deepEqual(setCustomFormat(input as LwM2MCoiote), expected))
+	}
 
-	it('should return empty object when instances of object is not found', () => {
+	void it('should return empty object when instances of object is not found', () => {
 		const input = {
 			'50001': undefined as unknown as Instance,
 		}
-		expect(setCustomFormat(input)).toStrictEqual({})
+		assert.deepEqual(setCustomFormat(input), {})
 	})
 
-	it('should return empty object when object is not found', () => {
+	void it('should return empty object when object is not found', () => {
 		const input = {
 			undefined,
 		} as unknown as LwM2MCoiote
-		expect(setCustomFormat(input)).toStrictEqual({})
+		assert.deepEqual(setCustomFormat(input), {})
 	})
 })
