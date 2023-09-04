@@ -1,3 +1,5 @@
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert'
 import {
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
@@ -13,8 +15,8 @@ import {
 	type assetTrackerObjects,
 } from './getAssetTrackerV2Objects.js'
 
-describe('getAssetTrackerV2Objects', () => {
-	it('should pick objects expected in Asset Tracker v2 LwM2M from input and build a new object from it', async () => {
+void describe('getAssetTrackerV2Objects', () => {
+	void it('should pick objects expected in Asset Tracker v2 LwM2M from input and build a new object from it', async () => {
 		const input = {
 			'3': {
 				'0': {
@@ -153,7 +155,7 @@ describe('getAssetTrackerV2Objects', () => {
 		}
 
 		const result = await getAssetTrackerV2Objects(input)
-		expect(Object.entries(result).length).toBe(assetTrackerObjectsList.length)
+		assert.equal(Object.entries(result).length, assetTrackerObjectsList.length)
 
 		const random = Math.floor(Math.random() * assetTrackerObjectsList.length)
 		const requiredAssetTrackerObjectKey = Object.keys(expectedOutput)[
@@ -161,6 +163,6 @@ describe('getAssetTrackerV2Objects', () => {
 		] as keyof assetTrackerObjects
 
 		// All objects from the expected output should exist in the result
-		expect(result[`${requiredAssetTrackerObjectKey}`]).not.toBe(undefined)
+		assert.notEqual(result[`${requiredAssetTrackerObjectKey}`], undefined)
 	})
 })
