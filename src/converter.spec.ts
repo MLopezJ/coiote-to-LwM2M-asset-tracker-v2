@@ -1,3 +1,5 @@
+import { describe, test as it } from 'node:test'
+import assert from 'node:assert'
 import {
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
@@ -9,8 +11,8 @@ import {
 import { Config_50009_urn } from '../schemas/Config_50009.js'
 import { converter, type DeviceTwin } from './converter.js'
 
-describe('converter', () => {
-	it(`should transform device twin to expected format`, async () => {
+void describe('converter', () => {
+	void it(`should transform device twin to expected format`, async () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -302,7 +304,7 @@ describe('converter', () => {
 			},
 		}
 
-		const result = {
+		const expected = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
 				'1': 'Thingy:91',
@@ -372,10 +374,12 @@ describe('converter', () => {
 			},
 		}
 
-		expect(await converter(coioteAzureLwM2M)).toMatchObject(result)
+		const result = await converter(coioteAzureLwM2M)
+
+		assert.strictEqual(result, expected)
 	})
 
-	it(`should transform to expected format even when not all the objects are present in the input`, async () => {
+	void it(`should transform to expected format even when not all the objects are present in the input`, async () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -458,7 +462,7 @@ describe('converter', () => {
 			},
 		}
 
-		const result = {
+		const expected = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
 				'1': 'Thingy:91',
@@ -471,6 +475,8 @@ describe('converter', () => {
 			},
 		}
 
-		expect(await converter(coioteAzureLwM2M)).toMatchObject(result)
+		const result = await converter(coioteAzureLwM2M)
+
+		assert.strictEqual(result, expected)
 	})
 })
