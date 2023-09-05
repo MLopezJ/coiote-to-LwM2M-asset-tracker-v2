@@ -6,7 +6,7 @@ import {
 	Humidity_3304_urn,
 	Pressure_3323_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { Config_50009_urn } from 'schemas/Config_50009'
+import { Config_50009_urn } from '../src/schemas/Config_50009.js'
 
 export const output = {
 	[Device_3_urn]: {

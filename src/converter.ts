@@ -14,7 +14,7 @@ import type {
 	Humidity_3304,
 	Pressure_3323,
 } from '@nordicsemiconductor/lwm2m-types'
-import { type Config_50009, Config_50009_urn } from '../schemas/Config_50009.js'
+import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { getAssetTrackerV2Objects } from './getAssetTrackerV2Objects.js'
 import { removeCoioteFormat } from './removeCoioteFormat.js'
 import { checkAssetTrackerV2Objects } from './utils/checkAssetTrackerV2Objects.js'

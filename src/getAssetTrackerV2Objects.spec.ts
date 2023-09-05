@@ -8,7 +8,7 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { Config_50009_urn } from '../schemas/Config_50009.js'
+import { Config_50009_urn } from './schemas/Config_50009.js'
 import {
 	getAssetTrackerV2Objects,
 	assetTrackerObjectsList,

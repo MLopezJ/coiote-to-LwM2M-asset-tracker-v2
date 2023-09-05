@@ -1,4 +1,4 @@
-import customObjectsSchema from '../../schemas/Config_50009.json'
+import customObjectsSchema from '../schemas/Config_50009.json'
 import type { LwM2MCoiote } from '../converter'
 import { convertObjectUsingSchema } from './convertObjectUsingSchema.js'
 import { removeFormat } from './removeFormat.js'
