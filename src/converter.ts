@@ -21,7 +21,7 @@ import {
 	checkAssetTrackerV2Objects,
 	Warning,
 } from './utils/checkAssetTrackerV2Objects.js'
-import { checkLwM2MFormat } from './utils/checkLwM2MFormat.js'
+import { checkLwM2MFormat, LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -61,7 +61,7 @@ export type LwM2MAssetTrackerV2 = {
 export const converter = async (
 	deviceTwin: DeviceTwin,
 	onWarning?: (element: Warning) => void,
-	onError?: (element: unknown) => void,
+	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const coioteLwM2M = deviceTwin.properties.reported.lwm2m
 	const objects = await getAssetTrackerV2Objects(coioteLwM2M)
@@ -72,7 +72,7 @@ export const converter = async (
 	const LwM2MAssetTrackerV2 = removeCoioteFormat(objects)
 
 	const LwM2MFormat = checkLwM2MFormat(LwM2MAssetTrackerV2)
-	if ('error' in LwM2MFormat) onError?.(LwM2MFormat.error) // TODO: return error
+	if ('error' in LwM2MFormat) onError?.(LwM2MFormat.error)
 
 	return LwM2MAssetTrackerV2
 }

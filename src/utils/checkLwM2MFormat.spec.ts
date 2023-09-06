@@ -5,7 +5,7 @@ import {
 	Location_6_urn,
 	type LwM2MDocument,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkLwM2MFormat } from './checkLwM2MFormat.js'
+import { checkLwM2MFormat, LwM2MFormatError } from './checkLwM2MFormat.js'
 
 void describe('checkLwM2MFormat', () => {
 	void it('should return true if object has the LwM2M struct', () => {
@@ -26,11 +26,11 @@ void describe('checkLwM2MFormat', () => {
 		const input = {
 			[Device_3_urn]: {
 				'0': 1, // expecting string
-				'1': 2, // expecting string
-				'2': 456, // expecting string
+				'1': '2', // expecting string
+				'2': '456', // expecting string
 				'3': '22.8.1+0',
-				'11': '0', // expecting number
-				'13': 'a', // expecting number
+				'11': [11],
+				'13': 123456,
 				'16': 'UQ',
 				'19': '3.2.1',
 			},
@@ -38,7 +38,11 @@ void describe('checkLwM2MFormat', () => {
 
 		const check = checkLwM2MFormat(
 			input as unknown as Partial<LwM2MDocument>,
-		) as { error: Error }
-		assert.notEqual(check.error, undefined)
+		) as { error: LwM2MFormatError }
+
+		const instancePathError = check.error.description[0]?.instancePath
+		const message = check.error.description[0]?.message
+		assert.equal(instancePathError, `/${Device_3_urn}/0`)
+		assert.equal(message, 'must be string')
 	})
 })
