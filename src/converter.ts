@@ -17,7 +17,10 @@ import type {
 import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { getAssetTrackerV2Objects } from './getAssetTrackerV2Objects.js'
 import { removeCoioteFormat } from './removeCoioteFormat.js'
-import { checkAssetTrackerV2Objects } from './utils/checkAssetTrackerV2Objects.js'
+import {
+	checkAssetTrackerV2Objects,
+	Warning,
+} from './utils/checkAssetTrackerV2Objects.js'
 import { checkLwM2MFormat } from './utils/checkLwM2MFormat.js'
 
 export type Value = { value: string | number | boolean }
@@ -57,7 +60,7 @@ export type LwM2MAssetTrackerV2 = {
  */
 export const converter = async (
 	deviceTwin: DeviceTwin,
-	onWarning?: (element: unknown) => void,
+	onWarning?: (element: Warning) => void,
 	onError?: (element: unknown) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const coioteLwM2M = deviceTwin.properties.reported.lwm2m
