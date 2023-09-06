@@ -19,7 +19,7 @@
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
-      "@nordicsemiconductor/coiote-azure-converter-js": ["index.d.ts"]
+      "coiote-to-LwM2M-asset-tracker-v2": ["index.d.ts"]
     }
   }
 }

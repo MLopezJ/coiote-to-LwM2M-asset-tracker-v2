@@ -1,12 +1,12 @@
 {
-  "name": "coiote-to-LwM2M-asset-tracker-v2",
+  "name": "coiote-to-lwm2m-asset-tracker-v2",
   "version": "1.0.0",
   "description": "Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration to LwM2M Asset Tracker v2 JSON encoding",
   "main": "index.js",
   "scripts": {
     "test": "find ./ -type f -name '*.spec.ts' ! -path '*/node_modules/*' -exec npx tsx {} ';'",
     "prepare": "husky install",
-    "prepublish": "npx swc -d dist ./src"
+    "prepublish": "npx swc -d dist ./src --copy-files"
   },
   "type": "module",
   "types": "./index.d.ts",
@@ -26,11 +26,12 @@
   "homepage": "https://github.com/MLopezJ/coiote-to-LwM2M-asset-tracker-v2#readme",
   "keywords": [
     "coiote",
+    "AVSystem",
     "LwM2M",
     "Asset Tracker v2"
   ],
-  "author": "Nordic Semiconductor",
-  "license": "ISC",
+  "author": "Nordic Semiconductor ASA | nordicsemi.no",
+  "license": "BSD-3-Clause",
   "jest": {
     "transform": {
       "^.+\\.(t|j)sx?$": [
@@ -63,7 +64,19 @@
     "branches": [
       "saga"
     ],
-    "remoteTags": true
+    "remoteTags": true,
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false,
+          "failTitle": false
+        }
+      ]
+    ]
   },
   "publishConfig": {
     "access": "public"
@@ -77,11 +90,12 @@
     "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "16.0.11",
     "@swc/cli": "0.1.62",
     "@swc/jest": "0.2.28",
-    "@types/jest": "^29.5.3",
+    "@types/jest": "29.5.3",
     "@typescript-eslint/eslint-plugin": "6.2.1",
     "husky": "8.0.3",
     "jest": "29.6.2",
     "prettier": "3.0.1",
+    "semantic-release": "21.1.1",
     "tsx": "3.12.7",
     "typescript": "5.1.6"
   }
