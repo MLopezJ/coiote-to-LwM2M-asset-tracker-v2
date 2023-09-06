@@ -23,7 +23,7 @@ export const convertToLwM2MInstance = (
 				dataType,
 			)
 			if (resource === false) {
-				console.log(
+				console.warn(
 					`id ${resourceId} is required in object in order with schema definition but it is missing`,
 					schema,
 				)

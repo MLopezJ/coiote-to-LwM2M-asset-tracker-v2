@@ -30,7 +30,7 @@ export const convertToLwM2MArrayInstance = (
 				 * this case will be represent in the final result as undefined value, but in the mean time it is represent as false value
 				 */
 				if (resource === false) {
-					console.log(
+					console.warn(
 						`id ${resourceId} is required in object in order with schema definition but missing in instance ${instanceId}`,
 						schema,
 					)
