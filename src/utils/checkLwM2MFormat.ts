@@ -10,8 +10,6 @@ type ErrorDescription = {
 }
 
 export class LwM2MFormatError extends Error {
-	override name: string
-	override message: string
 	description: ErrorDescription[]
 
 	constructor({

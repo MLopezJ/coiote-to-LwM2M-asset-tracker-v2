@@ -1,8 +1,6 @@
 import { assetTrackerObjectsList } from '../getAssetTrackerV2Objects.js'
 
 export class Warning extends Error {
-	override name: string
-	override message: string
 	missingObjects: string[]
 
 	constructor({
