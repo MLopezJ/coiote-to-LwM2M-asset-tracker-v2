@@ -81,17 +81,34 @@ export const converter = async (
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
 	const AssetTrackerV2LwM2MObjects = {
-		[Device_3_urn]: convertToLwM2M(deviceTwinData[coioteIds.Device]),
+		[Device_3_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.Device],
+			Device_3_urn,
+		),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M(
 			deviceTwinData[coioteIds.ConnectivityMonitoring],
+			ConnectivityMonitoring_4_urn,
 		),
-		[Location_6_urn]: convertToLwM2M(deviceTwinData[coioteIds.Location]),
+		[Location_6_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.Location],
+			Location_6_urn,
+		),
 		[Temperature_3303_urn]: convertToLwM2M(
 			deviceTwinData[coioteIds.Temperature],
+			Temperature_3303_urn,
 		),
-		[Humidity_3304_urn]: convertToLwM2M(deviceTwinData[coioteIds.Humidity]),
-		[Pressure_3323_urn]: convertToLwM2M(deviceTwinData[coioteIds.Pressure]),
-		[Config_50009_urn]: convertToLwM2M(deviceTwinData[coioteIds.Config]),
+		[Humidity_3304_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.Humidity],
+			Humidity_3304_urn,
+		),
+		[Pressure_3323_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.Pressure],
+			Pressure_3323_urn,
+		),
+		[Config_50009_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.Config],
+			Config_50009_urn,
+		),
 	}
 
 	console.log(AssetTrackerV2LwM2MObjects)

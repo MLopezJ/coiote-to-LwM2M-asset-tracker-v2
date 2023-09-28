@@ -1,16 +1,18 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { convertToLwM2M } from './convertToLwM2M.js'
+import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 
 void describe('convertToLwM2M', () => {
 	void it('should return warning if object is undefined', () => {
 		const input = undefined
-		const expected = 'a warning message'
+		const expected = `'${Device_3_urn}' object can not be converter because object id '3' is undefined in input received`
 
-		const { warning } = convertToLwM2M(input) as {
-			warning: unknown
+		const result = convertToLwM2M(input, Device_3_urn) as {
+			warning: UndefinedCoioteObjectWarning
 		}
-		assert.deepEqual(warning, expected)
+		assert.deepEqual(result.warning.message, expected)
 	})
 
 	void it('should return error if conversion from coiote format to LwM2M is not successful', () => {
@@ -61,7 +63,7 @@ void describe('convertToLwM2M', () => {
 
 		const expected = 'an error message'
 
-		const { error } = convertToLwM2M(input) as {
+		const { error } = convertToLwM2M(input, Device_3_urn) as {
 			error: unknown
 		}
 		assert.deepEqual(error, expected)
@@ -128,7 +130,7 @@ void describe('convertToLwM2M', () => {
 			'19': '3.2.1',
 		}
 
-		const { result } = convertToLwM2M(input) as {
+		const { result } = convertToLwM2M(input, Device_3_urn) as {
 			result: unknown
 		}
 		assert.deepEqual(result, expected)

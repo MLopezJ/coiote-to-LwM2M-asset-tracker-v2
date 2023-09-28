@@ -1,3 +1,6 @@
+import type { LwM2MAssetTrackerV2 } from 'src/converter.js'
+import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+
 /**
  * check if undefine ---> return warning
  * remove coiote format
@@ -5,12 +8,16 @@
  * return result  ---> return result
  */
 export const convertToLwM2M = (
-	object: unknown,
+	coioteObject: unknown,
+	LwM2MObjectUrn: keyof LwM2MAssetTrackerV2,
 ):
 	| {
 			result: unknown
 	  }
-	| { warning: unknown }
+	| { warning: UndefinedCoioteObjectWarning }
 	| { error: unknown } => {
-	return { warning: 'something' }
+	if (coioteObject === undefined) {
+		return { warning: new UndefinedCoioteObjectWarning(LwM2MObjectUrn) }
+	}
+	return { error: 'something' }
 }
