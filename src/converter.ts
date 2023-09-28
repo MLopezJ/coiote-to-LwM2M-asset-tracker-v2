@@ -22,6 +22,7 @@ import {
 	Warning,
 } from './utils/checkAssetTrackerV2Objects.js'
 import { checkLwM2MFormat, LwM2MFormatError } from './utils/checkLwM2MFormat.js'
+import { convertToLwM2M } from './utils/convertToLwM2M.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -56,6 +57,19 @@ export type LwM2MAssetTrackerV2 = {
 }
 
 /**
+ * The id of the Asset Tracker v2 objects given by Coiote
+ */
+const coioteIds = {
+	Device: 3,
+	ConnectivityMonitoring: 4,
+	Location: 6,
+	Temperature: 3303,
+	Humidity: 3304,
+	Pressure: 3323,
+	Config: 50009,
+}
+
+/**
  * Transform the device twin object coming from Azure to an object with LwM2M objects that are required by Asset Tracker v2
  */
 export const converter = async (
@@ -63,7 +77,38 @@ export const converter = async (
 	onWarning?: (element: Warning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
+	const conversionResult = {} as any //as LwM2MAssetTrackerV2
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
+
+	const AssetTrackerV2LwM2MObjects = {
+		[Device_3_urn]: convertToLwM2M(deviceTwinData[coioteIds.Device]),
+		[ConnectivityMonitoring_4_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.ConnectivityMonitoring],
+		),
+		[Location_6_urn]: convertToLwM2M(deviceTwinData[coioteIds.Location]),
+		[Temperature_3303_urn]: convertToLwM2M(
+			deviceTwinData[coioteIds.Temperature],
+		),
+		[Humidity_3304_urn]: convertToLwM2M(deviceTwinData[coioteIds.Humidity]),
+		[Pressure_3323_urn]: convertToLwM2M(deviceTwinData[coioteIds.Pressure]),
+		[Config_50009_urn]: convertToLwM2M(deviceTwinData[coioteIds.Config]),
+	}
+
+	console.log(AssetTrackerV2LwM2MObjects)
+
+	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
+		([objectURN, LwM2MObject]) => {
+			if ('result' in LwM2MObject)
+				conversionResult[objectURN] = LwM2MObject.result
+			else {
+				'warning' in LwM2MObject
+					? onWarning?.(LwM2MObject.warning as any)
+					: onError?.(LwM2MObject.error as any)
+			}
+		},
+	)
+	console.log(AssetTrackerV2LwM2MObjects)
+
 	const assetTrackerV2LwM2M_coioteFormat = await getAssetTrackerV2Objects(
 		deviceTwinData,
 	)
