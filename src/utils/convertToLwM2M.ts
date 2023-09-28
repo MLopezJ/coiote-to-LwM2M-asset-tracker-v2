@@ -1,4 +1,4 @@
-import type { LwM2MAssetTrackerV2 } from 'src/converter.js'
+import type { Instance, LwM2MAssetTrackerV2 } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { Config_50009_urn } from 'src/schemas/Config_50009.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'
@@ -11,12 +11,15 @@ import { checkLwM2MFormat } from './checkLwM2MFormat.js'
  * check LwM2M format --> return error
  * return result  ---> return result
  */
-export const convertToLwM2M = (
-	coioteObject: unknown,
-	LwM2MObjectUrn: keyof LwM2MAssetTrackerV2,
-):
+export const convertToLwM2M = ({
+	LwM2MObjectUrn,
+	coioteObject,
+}: {
+	LwM2MObjectUrn: keyof LwM2MAssetTrackerV2
+	coioteObject: Instance | undefined
+}):
 	| {
-			result: unknown // TODO: fix type
+			result: unknown // TODO: fix type valueOf LwM2MAssetTrackerV2
 	  }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: unknown } => {

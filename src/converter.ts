@@ -76,34 +76,34 @@ export const converter = async (
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
 	const AssetTrackerV2LwM2MObjects = {
-		[Device_3_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.Device],
-			Device_3_urn,
-		),
-		[ConnectivityMonitoring_4_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.ConnectivityMonitoring],
-			ConnectivityMonitoring_4_urn,
-		),
-		[Location_6_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.Location],
-			Location_6_urn,
-		),
-		[Temperature_3303_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.Temperature],
-			Temperature_3303_urn,
-		),
-		[Humidity_3304_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.Humidity],
-			Humidity_3304_urn,
-		),
-		[Pressure_3323_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.Pressure],
-			Pressure_3323_urn,
-		),
-		[Config_50009_urn]: convertToLwM2M(
-			deviceTwinData[coioteIds.Config],
-			Config_50009_urn,
-		),
+		[Device_3_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Device_3_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Device],
+		}),
+		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
+			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
+		}),
+		[Location_6_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Location_6_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Location],
+		}),
+		[Temperature_3303_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Temperature_3303_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Temperature],
+		}),
+		[Humidity_3304_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Humidity_3304_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Humidity],
+		}),
+		[Pressure_3323_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Pressure_3323_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Pressure],
+		}),
+		[Config_50009_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Config_50009_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Config],
+		}),
 	}
 
 	Object.entries(AssetTrackerV2LwM2MObjects).forEach(

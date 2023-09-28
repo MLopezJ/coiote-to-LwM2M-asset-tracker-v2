@@ -6,10 +6,12 @@ import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarnin
 
 void describe('convertToLwM2M', () => {
 	void it('should return warning if object is undefined', () => {
-		const input = undefined
 		const expected = `'${Device_3_urn}' object can not be converter because object id '3' is undefined in input received`
 
-		const result = convertToLwM2M(input, Device_3_urn) as {
+		const result = convertToLwM2M({
+			LwM2MObjectUrn: Device_3_urn,
+			coioteObject: undefined,
+		}) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(result.warning.message, expected)
@@ -63,12 +65,14 @@ void describe('convertToLwM2M', () => {
 
 		const expected = 'an error message'
 
-		const { error } = convertToLwM2M(input, Device_3_urn) as {
+		const result = convertToLwM2M({
+			LwM2MObjectUrn: Device_3_urn,
+			coioteObject: input,
+		}) as {
 			error: unknown
 		}
-		assert.deepEqual(error, expected)
+		assert.deepEqual(result.error, expected)
 	})
-
 	void it('should return the object with LwM2M format', () => {
 		/**
 		 * Device object in Coiote Format
@@ -130,7 +134,10 @@ void describe('convertToLwM2M', () => {
 			'19': '3.2.1',
 		}
 
-		const { result } = convertToLwM2M(input, Device_3_urn) as {
+		const { result } = convertToLwM2M({
+			LwM2MObjectUrn: Device_3_urn,
+			coioteObject: input,
+		}) as {
 			result: unknown
 		}
 		assert.deepEqual(result, expected)
