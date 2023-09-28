@@ -15,9 +15,9 @@ import type {
 	Pressure_3323,
 } from '@nordicsemiconductor/lwm2m-types'
 import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
-import { Warning } from './utils/checkAssetTrackerV2Objects.js'
 import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import { convertToLwM2M } from './utils/convertToLwM2M.js'
+import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -69,7 +69,7 @@ const coioteIds = {
  */
 export const converter = async (
 	deviceTwin: DeviceTwin,
-	onWarning?: (element: Warning) => void,
+	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const conversionResult = {} as any //as LwM2MAssetTrackerV2
@@ -112,7 +112,7 @@ export const converter = async (
 				conversionResult[objectURN] = LwM2MObject.result
 			else {
 				'warning' in LwM2MObject
-					? onWarning?.(LwM2MObject.warning as any)
+					? onWarning?.(LwM2MObject.warning)
 					: onError?.(LwM2MObject.error as any)
 			}
 		},
