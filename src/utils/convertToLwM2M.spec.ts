@@ -3,6 +3,7 @@ import assert from 'node:assert'
 import { convertToLwM2M } from './convertToLwM2M.js'
 import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 
 void describe('convertToLwM2M', () => {
 	void it('should return warning if object is undefined', () => {
@@ -19,7 +20,7 @@ void describe('convertToLwM2M', () => {
 
 	void it('should return error if conversion from coiote format to LwM2M is not successful', () => {
 		/**
-		 * Device object in Coiote Format with a format error (not added yet)
+		 * Device object in Coiote Format with a format error
 		 */
 		const input = {
 			'0': {
@@ -44,12 +45,8 @@ void describe('convertToLwM2M', () => {
 					},
 				},
 				'11': {
-					'0': {
-						value: 0,
-					},
-					attributes: {
-						dim: '1',
-					},
+					// this should be array
+					value: 1675874731,
 				},
 				'13': {
 					value: 1675874731,
@@ -63,16 +60,18 @@ void describe('convertToLwM2M', () => {
 			},
 		}
 
-		const expected = 'an error message'
-
 		const result = convertToLwM2M({
 			LwM2MObjectUrn: Device_3_urn,
 			coioteObject: input,
 		}) as {
-			error: unknown
+			error: LwM2MFormatError
 		}
-		assert.deepEqual(result.error, expected)
+		const instancePathError = result.error.description[0]?.instancePath
+		const message = result.error.description[0]?.message
+		assert.equal(instancePathError, `/${Device_3_urn}/11`)
+		assert.equal(message, 'must be array')
 	})
+
 	void it('should return the object with LwM2M format', () => {
 		/**
 		 * Device object in Coiote Format

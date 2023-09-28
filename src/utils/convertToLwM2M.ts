@@ -3,7 +3,7 @@ import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { Config_50009_urn } from 'src/schemas/Config_50009.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'
 import { setCustomFormat } from './setCustomFormat.js'
-import { checkLwM2MFormat } from './checkLwM2MFormat.js'
+import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
 
 /**
  * check if undefine ---> return warning
@@ -22,7 +22,7 @@ export const convertToLwM2M = ({
 			result: unknown // TODO: fix type valueOf LwM2MAssetTrackerV2
 	  }
 	| { warning: UndefinedCoioteObjectWarning }
-	| { error: unknown } => {
+	| { error: LwM2MFormatError } => {
 	if (coioteObject === undefined) {
 		return { warning: new UndefinedCoioteObjectWarning(LwM2MObjectUrn) }
 	}
@@ -38,7 +38,7 @@ export const convertToLwM2M = ({
 		})
 	}
 
-	const validatedLwM2MFormat = checkLwM2MFormat({ coioteFormatRemoved } as any)
+	const validatedLwM2MFormat = checkLwM2MFormat(coioteFormatRemoved)
 
 	if ('error' in validatedLwM2MFormat)
 		return { error: validatedLwM2MFormat.error }
