@@ -6,6 +6,17 @@ import { setCustomFormat } from './setCustomFormat.js'
 import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
 
 /**
+ * Defines the result type of 'convertToLwM2M' method, which will be one of the following options
+ * - result: contains the object converter from coiote format to LwM2M format
+ * - error: contains an object indicating the object has not the LwM2M format.
+ * - warning: contains an object indicating that the coiote object is undefined.
+ */
+type convertToLwM2MType =
+	| { result: unknown } // TODO: fix type valueOf LwM2MAssetTrackerV2
+	| { warning: UndefinedCoioteObjectWarning }
+	| { error: LwM2MFormatError }
+
+/**
  * check if undefine ---> return warning
  * remove coiote format
  * check LwM2M format --> return error
@@ -17,12 +28,7 @@ export const convertToLwM2M = ({
 }: {
 	LwM2MObjectUrn: keyof LwM2MAssetTrackerV2
 	coioteObject: Instance | undefined
-}):
-	| {
-			result: unknown // TODO: fix type valueOf LwM2MAssetTrackerV2
-	  }
-	| { warning: UndefinedCoioteObjectWarning }
-	| { error: LwM2MFormatError } => {
+}): convertToLwM2MType => {
 	if (coioteObject === undefined) {
 		return { warning: new UndefinedCoioteObjectWarning(LwM2MObjectUrn) }
 	}
