@@ -35,11 +35,12 @@ export const convertToLwM2M = ({
 		return { warning: new UndefinedCoioteObjectWarning(LwM2MObjectUrn) }
 	}
 
+	// remove coiote format
 	let coioteFormatRemoved = undefined
 	if (LwM2MObjectUrn === Config_50009_urn) {
 		coioteFormatRemoved = setCustomFormat({
 			[`${LwM2MObjectUrn}`]: coioteObject,
-		}) // TODO: fix type
+		})
 	} else {
 		coioteFormatRemoved = setLwM2MFormat({
 			[`${LwM2MObjectUrn}`]: coioteObject,
@@ -51,5 +52,5 @@ export const convertToLwM2M = ({
 	if ('error' in validatedLwM2MFormat)
 		return { error: validatedLwM2MFormat.error }
 
-	return { result: coioteFormatRemoved[LwM2MObjectUrn] } // TODO: fix type
+	return { result: coioteFormatRemoved[LwM2MObjectUrn] }
 }
