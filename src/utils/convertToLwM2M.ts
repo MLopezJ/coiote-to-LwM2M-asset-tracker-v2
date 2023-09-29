@@ -5,6 +5,8 @@ import { setLwM2MFormat } from './setLwM2MFormat.js'
 import { setCustomFormat } from './setCustomFormat.js'
 import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
 
+type ValueOf<T> = T[keyof T]
+
 /**
  * Defines the result type of 'convertToLwM2M' method, which will be one of the following options
  * - result: contains the object converter from coiote format to LwM2M format
@@ -12,7 +14,7 @@ import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
  * - warning: contains an object indicating that the coiote object is undefined.
  */
 type convertToLwM2MType =
-	| { result: unknown } // TODO: fix type valueOf LwM2MAssetTrackerV2
+	| { result: ValueOf<LwM2MAssetTrackerV2> }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }
 
