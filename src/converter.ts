@@ -72,7 +72,7 @@ export const converter = async (
 	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
-	const conversionResult = {} as any //as LwM2MAssetTrackerV2
+	const conversionResult = {} as any //as LwM2MAssetTrackerV2 . TODO: solve this
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
 	const AssetTrackerV2LwM2MObjects = {
