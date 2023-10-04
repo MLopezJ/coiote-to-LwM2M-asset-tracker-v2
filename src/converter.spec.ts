@@ -12,7 +12,7 @@ import { Config_50009_urn } from './schemas/Config_50009.js'
 import { converter, type DeviceTwin } from './converter.js'
 
 void describe('converter', () => {
-	void it(`should transform device twin to expected format`, async () => {
+	void it(`should convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format`, async () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -393,7 +393,7 @@ void describe('converter', () => {
 		assert.deepEqual(result[Config_50009_urn], expected[Config_50009_urn])
 	})
 
-	void it(`should transform to expected format even when not all the objects are present in the input`, async () => {
+	void it(`should convert to 'LwM2M Asset Tracker v2' format when 'Coiote Asset Tracker v2' has some values as undefined`, async () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
