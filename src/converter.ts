@@ -65,7 +65,7 @@ const coioteIds = {
 }
 
 /**
- * Transform the device twin object coming from Azure to an object with LwM2M objects that are required by Asset Tracker v2
+ * Convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format
  */
 export const converter = async (
 	deviceTwin: DeviceTwin,
