@@ -1,5 +1,9 @@
-import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
+import type {
+	Device_3_urn,
+	LwM2MDocument,
+} from '@nordicsemiconductor/lwm2m-types'
 import { validate } from '@nordicsemiconductor/lwm2m-types'
+import type { Location_6_urn } from 'src/schemas'
 
 type ErrorDescription = {
 	instancePath: string
@@ -46,4 +50,25 @@ export const checkLwM2MFormat = (
 		}
 	}
 	return { result: true }
+}
+
+/**
+ * Validate that object follow the LwM2M definition
+ */
+export const validateLwM2MFormat = <T>(
+	urn: typeof Device_3_urn | typeof Location_6_urn,
+	object: T,
+): { result: typeof object } | { error: LwM2MFormatError } => {
+	const validatedLwM2MObject = validate({ [urn]: object })
+	if ('errors' in validatedLwM2MObject) {
+		return {
+			error: new LwM2MFormatError({
+				name: 'error',
+				message: 'format error',
+				description: validatedLwM2MObject.errors,
+			}),
+		}
+	}
+	const obj = validatedLwM2MObject.value[urn] as typeof object
+	return { result: obj }
 }

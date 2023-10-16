@@ -1,6 +1,9 @@
 import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
+import {
+	validateLwM2MFormat,
+	type LwM2MFormatError,
+} from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
@@ -25,10 +28,5 @@ export const getDevice = (
 		schema,
 	) as Device_3 // TODO: return the type in the function
 
-	const validatedLwM2MDevice = checkLwM2MFormat({ [Device_3_urn]: device })
-
-	if ('error' in validatedLwM2MDevice)
-		return { error: validatedLwM2MDevice.error }
-
-	return { result: device }
+	return validateLwM2MFormat(Device_3_urn, device)
 }

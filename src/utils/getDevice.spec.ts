@@ -63,6 +63,7 @@ void describe('getDevice', () => {
 		}
 
 		const device = getDevice(device_coiote) as { result: unknown }
+		console.log(device.result)
 		assert.deepEqual(device.result, expected)
 	})
 
