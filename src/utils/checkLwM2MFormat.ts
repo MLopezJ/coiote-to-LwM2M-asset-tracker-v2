@@ -3,7 +3,7 @@ import type {
 	LwM2MDocument,
 } from '@nordicsemiconductor/lwm2m-types'
 import { validate } from '@nordicsemiconductor/lwm2m-types'
-import type { Location_6_urn } from 'src/schemas'
+import type { ConnectivityMonitoring_4_urn, Location_6_urn } from 'src/schemas'
 
 type ErrorDescription = {
 	instancePath: string
@@ -56,7 +56,10 @@ export const checkLwM2MFormat = (
  * Validate that object follow the LwM2M definition
  */
 export const validateLwM2MFormat = <T>(
-	urn: typeof Device_3_urn | typeof Location_6_urn,
+	urn:
+		| typeof Device_3_urn
+		| typeof Location_6_urn
+		| typeof ConnectivityMonitoring_4_urn,
 	object: T,
 ): { result: typeof object } | { error: LwM2MFormatError } => {
 	const validatedLwM2MObject = validate({ [urn]: object })

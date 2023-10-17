@@ -3,7 +3,10 @@ import {
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
+import {
+	validateLwM2MFormat,
+	type LwM2MFormatError,
+} from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
@@ -30,14 +33,8 @@ export const getConnectivityMonitoring = (
 		schema,
 	) as ConnectivityMonitoring_4 // TODO: return the type in the function
 
-	const validatedLwM2MDevice = checkLwM2MFormat({
-		[ConnectivityMonitoring_4_urn]: connectivityMonitoring,
-	})
-
-	if ('error' in validatedLwM2MDevice)
-		return { error: validatedLwM2MDevice.error }
-
-	return {
-		result: connectivityMonitoring,
-	}
+	return validateLwM2MFormat(
+		ConnectivityMonitoring_4_urn,
+		connectivityMonitoring,
+	)
 }
