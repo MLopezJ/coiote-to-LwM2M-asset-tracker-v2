@@ -17,7 +17,7 @@ import type {
 	Pressure_3323,
 	Config_50009,
 } from './schemas/index.js'
-import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
+import { LwM2MFormatError } from './utils/validateLwM2MFormat.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { getDevice } from './utils/getDevice.js'

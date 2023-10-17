@@ -4,7 +4,7 @@ import { getLocation } from './getLocation.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { Location_6_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
-import type { LwM2MFormatError } from './checkLwM2MFormat.js'
+import type { LwM2MFormatError } from './validateLwM2MFormat.js'
 
 void describe('getLocation', () => {
 	void it(`should create the LwM2M object 'Location' (6) from the object '6' reported by Coiote`, () => {

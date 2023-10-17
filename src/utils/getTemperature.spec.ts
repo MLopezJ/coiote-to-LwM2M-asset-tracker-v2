@@ -3,7 +3,7 @@ import assert from 'node:assert'
 import { getTemperature } from './getTemperature.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
-import type { LwM2MFormatError } from './checkLwM2MFormat.js'
+import type { LwM2MFormatError } from './validateLwM2MFormat.js'
 import {
 	Temperature_3303_urn,
 	type Temperature_3303,

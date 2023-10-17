@@ -3,7 +3,7 @@ import assert from 'node:assert'
 import { getPressure } from './getPressure.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
-import type { LwM2MFormatError } from './checkLwM2MFormat.js'
+import type { LwM2MFormatError } from './validateLwM2MFormat.js'
 import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 

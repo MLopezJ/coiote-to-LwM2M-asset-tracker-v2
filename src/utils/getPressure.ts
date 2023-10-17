@@ -1,7 +1,7 @@
 import { type Pressure_3323, Pressure_3323_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { LwM2MFormatError, validateLwM2MFormat } from './checkLwM2MFormat.js'
+import { LwM2MFormatError, validateLwM2MFormat } from './validateLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,

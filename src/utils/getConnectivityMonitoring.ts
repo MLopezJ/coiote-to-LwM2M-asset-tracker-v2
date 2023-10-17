@@ -6,7 +6,7 @@ import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import {
 	validateLwM2MFormat,
 	type LwM2MFormatError,
-} from './checkLwM2MFormat.js'
+} from './validateLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'

@@ -1,10 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { Device_3_urn, Location_6_urn } from '../schemas/index.js'
-import {
-	LwM2MFormatError,
-	validateLwM2MFormat,
-} from './checkLwM2MFormat.js'
+import { LwM2MFormatError, validateLwM2MFormat } from './validateLwM2MFormat.js'
 
 void describe('validateLwM2MFormat', () => {
 	void it('should return object if it has the LwM2M struct', () => {
