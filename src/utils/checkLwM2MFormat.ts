@@ -6,6 +6,7 @@ import type {
 	Location_6_urn,
 	Temperature_3303_urn,
 	Humidity_3304_urn,
+	Pressure_3323_urn,
 } from 'src/schemas'
 
 type ErrorDescription = {
@@ -64,7 +65,8 @@ export const validateLwM2MFormat = <T>(
 		| typeof Location_6_urn
 		| typeof ConnectivityMonitoring_4_urn
 		| typeof Temperature_3303_urn
-		| typeof Humidity_3304_urn,
+		| typeof Humidity_3304_urn
+		| typeof Pressure_3323_urn,
 	object: T,
 ): { result: typeof object } | { error: LwM2MFormatError } => {
 	const validatedLwM2MObject = validate({ [urn]: object })

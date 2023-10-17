@@ -1,7 +1,7 @@
 import { type Pressure_3323, Pressure_3323_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
+import { LwM2MFormatError, validateLwM2MFormat } from './checkLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
@@ -35,15 +35,5 @@ export const getPressure = (
 		pressure[0][5518] = getTimestampFromMetadata(Pressure_3323_urn, metadata)
 	}
 
-	const validatedLwM2MPressure = checkLwM2MFormat({
-		[Pressure_3323_urn]: pressure,
-	})
-
-	if ('error' in validatedLwM2MPressure) {
-		return { error: validatedLwM2MPressure.error }
-	}
-
-	return {
-		result: pressure,
-	}
+	return validateLwM2MFormat(Pressure_3323_urn, pressure)
 }
