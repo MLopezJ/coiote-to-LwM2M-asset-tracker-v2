@@ -1,6 +1,9 @@
 import { Location_6_urn, type Location_6 } from '../schemas/index.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
+import {
+	validateLwM2MFormat,
+	type LwM2MFormatError,
+} from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
@@ -25,12 +28,5 @@ export const getLocation = (
 		schema,
 	) as Location_6 // TODO: return the type in the function
 
-	const validatedLwM2MLocation = checkLwM2MFormat({
-		[Location_6_urn]: location,
-	})
-
-	if ('error' in validatedLwM2MLocation)
-		return { error: validatedLwM2MLocation.error }
-
-	return { result: location }
+	return validateLwM2MFormat(Location_6_urn, location)
 }
