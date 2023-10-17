@@ -4,7 +4,7 @@ import {
 } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
+import { LwM2MFormatError, validateLwM2MFormat } from './checkLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
@@ -37,22 +37,11 @@ export const getTemperature = (
 	if (
 		temperature[0] !== undefined &&
 		isTimestampUndefinedIn(temperature) === true
-	) {
+	)
 		temperature[0][5518] = getTimestampFromMetadata(
 			Temperature_3303_urn,
 			metadata,
 		)
-	}
 
-	const validatedLwM2MTemperature = checkLwM2MFormat({
-		[Temperature_3303_urn]: temperature,
-	})
-
-	if ('error' in validatedLwM2MTemperature) {
-		return { error: validatedLwM2MTemperature.error }
-	}
-
-	return {
-		result: temperature,
-	}
+	return validateLwM2MFormat(Temperature_3303_urn, temperature)
 }
