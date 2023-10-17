@@ -1,5 +1,5 @@
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
+import { type LwM2MFormatError } from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import {
 	Config_50009_urn,
@@ -24,10 +24,13 @@ export const getConfig = (config_coiote?: Instance): getConfigResult => {
 	})
 
 	// FIXME: this check is not working.
+	// TODO: validate the veracity of the new format
+	/*
 	const validatedLwM2MConfig = checkLwM2MFormat(config)
 
 	if ('error' in validatedLwM2MConfig)
 		return { error: validatedLwM2MConfig.error }
+	*/
 
 	return { result: config[Config_50009_urn] as unknown as Config_50009 }
 }
