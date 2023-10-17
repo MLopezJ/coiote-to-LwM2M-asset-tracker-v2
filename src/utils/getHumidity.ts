@@ -1,7 +1,7 @@
 import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
+import { LwM2MFormatError, validateLwM2MFormat } from './checkLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
@@ -35,15 +35,5 @@ export const getHumidity = (
 		humidity[0][5518] = getTimestampFromMetadata(Humidity_3304_urn, metadata)
 	}
 
-	const validatedLwM2MHumidity = checkLwM2MFormat({
-		[Humidity_3304_urn]: humidity,
-	})
-
-	if ('error' in validatedLwM2MHumidity) {
-		return { error: validatedLwM2MHumidity.error }
-	}
-
-	return {
-		result: humidity,
-	}
+	return validateLwM2MFormat(Humidity_3304_urn, humidity)
 }
