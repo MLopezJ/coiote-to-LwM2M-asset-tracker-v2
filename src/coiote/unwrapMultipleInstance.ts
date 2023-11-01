@@ -12,8 +12,7 @@ type MultipleInstancesObj = Record<string, unknown>[]
 export const unwrapMultipleInstance = (
 	input: Instance,
 ): MultipleInstancesObj => {
-	const instances = Object.entries(input)
-	return instances.map(([, resources]) => {
+	const instances = Object.entries(input).map(([, resources]) => {
 		const instance = Object.entries(resources)
 			.map(([resourceId, value]) => {
 				const newFormat = removeKeyFromResource(value)
@@ -23,5 +22,6 @@ export const unwrapMultipleInstance = (
 			})
 			.reduce((previous, current) => ({ ...current, ...previous }), {})
 		return instance
-	}) as unknown as MultipleInstancesObj
+	})
+	return instances
 }
