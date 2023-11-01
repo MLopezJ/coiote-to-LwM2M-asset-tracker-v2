@@ -18,9 +18,7 @@ export const getHumidity = (
 ): ConversionResult<Humidity_3304> => {
 	if (object === undefined) return warning(Humidity_3304_urn)
 
-	const maybeHumidity = removeCoioteFormatFrom(
-		object,
-	) as unknown as Humidity_3304
+	const maybeHumidity = removeCoioteFormatFrom<Humidity_3304>(object)
 
 	if (
 		maybeHumidity[0] !== undefined &&

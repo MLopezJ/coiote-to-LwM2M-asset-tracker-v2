@@ -2,14 +2,9 @@ import type { Instance } from './LwM2MCoioteType.js'
 import { removeKeyFromResource } from './unwrapSingleInstance.js'
 
 /**
- * Multiple Instances objects in Assset Tracker v2
- */
-type MultipleInstancesObj = Record<string, unknown>[]
-
-/**
  * Remove coiote format from multiple instance object
  */
-export const unwrapMultipleInstance = (
+export const unwrapMultipleInstance = <MultipleInstancesObj>(
 	input: Instance,
 ): MultipleInstancesObj => {
 	const instances = Object.entries(input).map(([, resources]) => {
@@ -23,5 +18,5 @@ export const unwrapMultipleInstance = (
 			.reduce((previous, current) => ({ ...current, ...previous }), {})
 		return instance
 	})
-	return instances
+	return instances as MultipleInstancesObj
 }

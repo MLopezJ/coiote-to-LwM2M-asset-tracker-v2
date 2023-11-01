@@ -18,9 +18,7 @@ export const getPressure = (
 ): ConversionResult<Pressure_3323> => {
 	if (object === undefined) return warning(Pressure_3323_urn)
 
-	const maybePressure = removeCoioteFormatFrom(
-		object,
-	) as unknown as Pressure_3323
+	const maybePressure = removeCoioteFormatFrom<Pressure_3323>(object)
 
 	if (
 		maybePressure[0] !== undefined &&

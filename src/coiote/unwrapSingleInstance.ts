@@ -5,14 +5,9 @@ import type {
 } from './LwM2MCoioteType.js'
 
 /**
- * Single Instances objects in Assset Tracker v2
- */
-type SingleInstancesObj = Record<string, unknown>
-
-/**
  *  Remove coiote format from single instance object
  */
-export const unwrapSingleInstance = (
+export const unwrapSingleInstance = <SingleInstancesObj>(
 	input: coioteInstance,
 ): SingleInstancesObj => {
 	const resources = input['0'] ?? []
@@ -30,7 +25,7 @@ export const unwrapSingleInstance = (
 			}),
 			{},
 		)
-	return instance
+	return instance as SingleInstancesObj
 }
 
 /**

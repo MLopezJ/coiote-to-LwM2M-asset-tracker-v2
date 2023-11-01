@@ -13,7 +13,7 @@ export const getLocation = (
 ): ConversionResult<Location_6> => {
 	if (object === undefined) return warning(Location_6_urn)
 
-	const maybeLocation = removeCoioteFormatFrom(object)
+	const maybeLocation = removeCoioteFormatFrom<Location_6>(object)
 
-	return validateLwM2MFormat(Location_6_urn, maybeLocation as Location_6)
+	return validateLwM2MFormat(Location_6_urn, maybeLocation)
 }

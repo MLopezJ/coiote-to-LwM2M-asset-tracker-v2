@@ -17,10 +17,7 @@ export const getConfig = (
 ): ConversionResult<Config_50009> => {
 	if (object === undefined) return warning(Config_50009_urn)
 
-	const maybeConfig = removeCoioteFormatFrom(object)
+	const maybeConfig = removeCoioteFormatFrom<Config_50009>(object)
 
-	return validateAgainstSchema(
-		maybeConfig as Config_50009,
-		Config_50009_Typebox,
-	)
+	return validateAgainstSchema(maybeConfig, Config_50009_Typebox)
 }
