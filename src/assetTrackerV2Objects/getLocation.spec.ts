@@ -40,11 +40,11 @@ void describe('getLocation', () => {
 		}
 		assert.equal(
 			location.error.message,
-			`'${Location_6_urn}' object can not be converter because object id '6' is undefined in input received`,
+			`'${Location_6_urn}' object can not be converted because object id '6' is undefined in input received`,
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M obejct 6`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M object 6`, () => {
 		const location_coiote = {
 			'0': {
 				// '0': { value: -43.5723 }, required value is missing

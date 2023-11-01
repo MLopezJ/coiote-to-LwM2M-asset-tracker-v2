@@ -42,12 +42,12 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 	void it(`should return undefined when resource does not follow Coiote format`, () => {
 		const object = {
 			'0': {
-				'0': {}, // uknown format here
+				'0': {}, // unknown format here
 				'1': {
 					value: 'Thingy:91',
 				},
 				'11': {
-					'0': {}, // uknown format here
+					'0': {}, // unknown format here
 					'1': {
 						value: 0,
 					},
@@ -56,7 +56,7 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 					},
 				},
 				'16': {
-					values: 'UQ', // uknown format here
+					values: 'UQ', // unknown format here
 				},
 			},
 		} as unknown as Instance

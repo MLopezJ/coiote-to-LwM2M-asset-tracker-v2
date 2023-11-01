@@ -103,7 +103,7 @@ void describe('getPressure', () => {
 		}
 		assert.deepEqual(
 			pressure.error.message,
-			`'${Pressure_3323_urn}' object can not be converter because object id '3323' is undefined in input received`,
+			`'${Pressure_3323_urn}' object can not be converted because object id '3323' is undefined in input received`,
 		)
 	})
 

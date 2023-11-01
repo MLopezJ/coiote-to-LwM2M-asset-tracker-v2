@@ -65,11 +65,11 @@ void describe('getConfig', () => {
 		}
 		assert.equal(
 			config.error.message,
-			`'${Config_50009_urn}' object can not be converter because object id '50009' is undefined in input received`,
+			`'${Config_50009_urn}' object can not be converted because object id '50009' is undefined in input received`,
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M obejct 50009`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M object 50009`, () => {
 		const config_coiote = {
 			'0': {
 				'0': {

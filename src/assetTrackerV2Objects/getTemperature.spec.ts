@@ -106,7 +106,7 @@ void describe('getTemperature', () => {
 		}
 		assert.deepEqual(
 			temperature.error.message,
-			`'${Temperature_3303_urn}' object can not be converter because object id '3303' is undefined in input received`,
+			`'${Temperature_3303_urn}' object can not be converted because object id '3303' is undefined in input received`,
 		)
 	})
 

@@ -78,11 +78,11 @@ void describe('getConnectivityMonitoring', () => {
 		}
 		assert.equal(
 			connectivityMonitoring.error.message,
-			`'${ConnectivityMonitoring_4_urn}' object can not be converter because object id '4' is undefined in input received`,
+			`'${ConnectivityMonitoring_4_urn}' object can not be converted because object id '4' is undefined in input received`,
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M obejct 4`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M object 4`, () => {
 		const connectivityMonitoring_coiote = {
 			'0': {
 				/*

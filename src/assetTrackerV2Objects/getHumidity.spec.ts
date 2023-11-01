@@ -103,7 +103,7 @@ void describe('getHumidity', () => {
 		}
 		assert.deepEqual(
 			humidity.error.message,
-			`'${Humidity_3304_urn}' object can not be converter because object id '3304' is undefined in input received`,
+			`'${Humidity_3304_urn}' object can not be converted because object id '3304' is undefined in input received`,
 		)
 	})
 
