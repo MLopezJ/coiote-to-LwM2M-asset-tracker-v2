@@ -21,7 +21,9 @@ export const getTemperature = (
 ): ConversionResult<Temperature_3303> => {
 	if (object === undefined) return warning(Temperature_3303_urn)
 
-	const maybeTemperature = removeCoioteFormatFrom(object)
+	const maybeTemperature = removeCoioteFormatFrom(
+		object,
+	) as unknown as Temperature_3303
 
 	if (
 		maybeTemperature[0] !== undefined &&
