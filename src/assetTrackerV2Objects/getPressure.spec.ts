@@ -2,7 +2,6 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getPressure } from './getPressure.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import { ValidationError } from '../converter/ValidationError.js'
 import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/lwm2m.js'
 import {
@@ -152,10 +151,7 @@ void describe('getPressure', () => {
 			},
 		}
 
-		const temperature = getPressure(
-			metadata,
-			pressure_coiote as unknown as Instance,
-		) as {
+		const temperature = getPressure(metadata, pressure_coiote as any) as {
 			error: ValidationError
 		}
 

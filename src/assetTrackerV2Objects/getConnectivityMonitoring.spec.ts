@@ -1,7 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import type { ValidationError } from '../converter/ValidationError.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { ConnectivityMonitoring_4_urn } from '../schemas/lwm2m.js'
@@ -69,6 +68,7 @@ void describe('getConnectivityMonitoring', () => {
 		const connectivityMonitoring = getConnectivityMonitoring(
 			connectivityMonitoring_coiote,
 		) as { result: unknown }
+
 		assert.deepEqual(connectivityMonitoring.result, expected)
 	})
 
@@ -133,7 +133,7 @@ void describe('getConnectivityMonitoring', () => {
 		}
 
 		const connectivityMonitoring = getConnectivityMonitoring(
-			connectivityMonitoring_coiote as unknown as Instance,
+			connectivityMonitoring_coiote as any,
 		) as {
 			error: ValidationError
 		}

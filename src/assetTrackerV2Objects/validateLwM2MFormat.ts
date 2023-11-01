@@ -1,25 +1,11 @@
-import { validate } from '@nordicsemiconductor/lwm2m-types'
-import type {
-	Device_3_urn,
-	ConnectivityMonitoring_4_urn,
-	Location_6_urn,
-	Temperature_3303_urn,
-	Humidity_3304_urn,
-	Pressure_3323_urn,
-} from '../schemas/lwm2m.js'
+import { validate, type LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import { ValidationError } from '../converter/ValidationError.js'
 
 /**
  * Validate that object follow the LwM2M definition
  */
 export const validateLwM2MFormat = <T>(
-	urn:
-		| typeof Device_3_urn
-		| typeof Location_6_urn
-		| typeof ConnectivityMonitoring_4_urn
-		| typeof Temperature_3303_urn
-		| typeof Humidity_3304_urn
-		| typeof Pressure_3323_urn,
+	urn: keyof LwM2MDocument,
 	object: T,
 ): { result: typeof object } | { error: ValidationError } => {
 	const validatedLwM2MObject = validate({ [urn]: object })

@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { unwrapMultipleInstance } from './unwrapMultipleInstance.js'
+import { unwrapMultipleInstance } from './unwrap.js'
 
 void describe('unwrapMultipleInstance', () => {
-	void it(`should remove coiote format from multiple instance object`, () => {
-		const object = {
+	void it(`should remove Coiote format from multiple instance object`, () => {
+		const object: Parameters<typeof unwrapMultipleInstance>[0] = {
 			'0': {
 				'0': {
 					value: 1,
@@ -42,7 +42,7 @@ void describe('unwrapMultipleInstance', () => {
 				},
 			},
 		}
-		const result = [
+		const result: ReturnType<typeof unwrapMultipleInstance> = [
 			{
 				'0': 1,
 				'1': 50,
@@ -76,8 +76,8 @@ void describe('unwrapMultipleInstance', () => {
 					value: 50,
 				},
 			},
-		}
-		const result = [
+		} as any
+		const result: ReturnType<typeof unwrapMultipleInstance> = [
 			{
 				'0': 1,
 				'1': undefined,

@@ -55,7 +55,7 @@ export const getTimestampFromMetadata = (
 	metadata: Metadata,
 ): number => {
 	const { ObjectID } = parseURN(objectUrn)
-	const object = metadata.lwm2m[`${ObjectID as unknown as number}`]
+	const object = metadata.lwm2m[`${parseInt(ObjectID, 10)}`]
 
 	if (object !== undefined) {
 		if (object['0'] !== undefined) {

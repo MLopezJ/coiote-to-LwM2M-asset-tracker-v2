@@ -7,7 +7,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
+import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrap.js'
 
 /**
  * Build the Humidity object from LwM2M using the object 3304 reported by Coiote

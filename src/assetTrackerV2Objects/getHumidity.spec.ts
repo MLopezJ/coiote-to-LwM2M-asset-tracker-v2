@@ -2,7 +2,6 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getHumidity } from './getHumidity.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import { ValidationError } from '../converter/ValidationError.js'
 import { Humidity_3304_urn, type Humidity_3304 } from '../schemas/lwm2m.js'
 import {
@@ -155,10 +154,7 @@ void describe('getHumidity', () => {
 			},
 		}
 
-		const humidity = getHumidity(
-			metadata,
-			humidity_coiote as unknown as Instance,
-		) as {
+		const humidity = getHumidity(metadata, humidity_coiote as any) as {
 			error: ValidationError
 		}
 		const errorMessage = humidity.error.description[0]?.message

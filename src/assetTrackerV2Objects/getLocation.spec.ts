@@ -3,7 +3,6 @@ import assert from 'node:assert'
 import { getLocation } from './getLocation.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { Location_6_urn } from '../schemas/lwm2m.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import { ValidationError } from '../converter/ValidationError.js'
 
 void describe('getLocation', () => {
@@ -56,7 +55,7 @@ void describe('getLocation', () => {
 			},
 		}
 
-		const location = getLocation(location_coiote as unknown as Instance) as {
+		const location = getLocation(location_coiote as any) as {
 			error: ValidationError
 		}
 

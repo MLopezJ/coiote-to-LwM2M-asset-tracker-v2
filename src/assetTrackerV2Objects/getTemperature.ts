@@ -9,7 +9,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
+import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrap.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 
 /**
