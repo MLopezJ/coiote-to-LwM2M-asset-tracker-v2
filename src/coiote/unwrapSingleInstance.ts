@@ -30,7 +30,7 @@ export const unwrapSingleInstance = (
 			}),
 			{},
 		)
-	return instance as SingleInstancesObj
+	return instance
 }
 
 /**
