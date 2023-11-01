@@ -3,28 +3,18 @@ import type {
 	Value,
 	Instance as coioteInstance,
 } from './LwM2MCoioteType.js'
-import {
-	type Device_3,
-	type ConnectivityMonitoring_4,
-	type Location_6,
-	type Config_50009,
-} from '../schemas/lwm2m.js'
 
 /**
  * Single Instances objects in Assset Tracker v2
  */
-type SingleInstancesObjs =
-	| Device_3
-	| ConnectivityMonitoring_4
-	| Location_6
-	| Config_50009
+type SingleInstancesObj = Record<string, unknown>
 
 /**
  *  Remove coiote format from single instance object
  */
 export const unwrapSingleInstance = (
 	input: coioteInstance,
-): SingleInstancesObjs => {
+): SingleInstancesObj => {
 	const resources = input['0'] ?? []
 	const instance = Object.entries(resources)
 		.map(([resourceId, value]) => {
@@ -40,7 +30,7 @@ export const unwrapSingleInstance = (
 			}),
 			{},
 		)
-	return instance as SingleInstancesObjs
+	return instance as SingleInstancesObj
 }
 
 /**
